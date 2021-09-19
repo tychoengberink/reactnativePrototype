@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
 
-import AddParty from '../components/form/AddPartyForm';
+import { AddPartyForm } from '../components/form/AddPartyForm';
 import { Text, View } from '../components/Themed';
 
 export default function ModalScreen({title='Modal'} : {title: string}) {
@@ -10,7 +10,7 @@ export default function ModalScreen({title='Modal'} : {title: string}) {
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <AddParty path="/screens/ModalScreen.tsx" />
+      <AddPartyForm path="/screens/ModalScreen.tsx" />
 
       {/* Use a light status bar on iOS to account for the black space above the modal */}
       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
