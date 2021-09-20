@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { FlatList, StyleSheet, TouchableHighlight } from 'react-native';
+import { Dimensions, FlatList, StyleSheet, TouchableHighlight } from 'react-native';
 import { Text, View } from '../components/Themed';
 import { Party, RootTabScreenProps } from '../types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -30,22 +30,27 @@ export default function UpcomingPartiesTab({ navigation }: RootTabScreenProps<'T
       }
     });
     }
-    console.log(parties);
     setParties(parties);
 }
+const dimensions = Dimensions.get('window');
+const screenWidth = dimensions.width;
 
   return (
     <View  style={styles.container}>
       { parties &&
-      <FlatList
+      <FlatList style={{
+        flex: 1,
+        width: screenWidth,
+         }}
         data={parties}
         keyExtractor={(item) => item.id}
-        renderItem={({item}) => {return <TouchableHighlight onPress={() => goToNextScreen(item)}>
+        renderItem={({item}) => (
+        <TouchableHighlight onPress={() => goToNextScreen(item)}>
         <View style={styles.item}  >
           <Text style={styles.title}>{item.title}</Text>
           <Text>{item.description}</Text>
         </View>
-        </TouchableHighlight>}}/> 
+        </TouchableHighlight>)}/>
       }
     </View>
   );

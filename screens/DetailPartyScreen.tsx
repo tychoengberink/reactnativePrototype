@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import { ContactsWrapper } from 'react-native-contacts-wrapper';
-
+import { PermissionsAndroid } from 'react-native';
 import { Button, StyleSheet } from "react-native";
 import { Text, View } from '../components/Themed';
+import Contacts from 'react-native-contacts';
 
 export default function DetailsPartyScreen({ route, navigation }) {
     const { party } = route.params;
@@ -13,18 +13,42 @@ export default function DetailsPartyScreen({ route, navigation }) {
         })
       })
 
-      function addInvitee(){
-        console.log(ContactsWrapper);
-        ContactsWrapper.getContact()
-        .then((contact) => {
-            // Replace this code
+     async function addInvitee(){
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.WRITE_CONTACTS,
+          {
+            title: "Cool Photo App Camera Permission",
+            message:
+              "Cool Photo App needs access to your camera " +
+              "so you can take awesome pictures.",
+            buttonNeutral: "Ask Me Later",
+            buttonNegative: "Cancel",
+            buttonPositive: "OK"
+          }
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          var newPerson = {
+            emailAddresses: [{
+              label: "work",
+              email: "mrniet@example.com",
+            }],
+            displayName: "Friedrich Nietzsche"
+          }
+          
+          Contacts.openContactForm(newPerson).then(contact => {
             console.log(contact);
-        })
-        .catch((error) => {
-            console.log("ERROR CODE: ", error.code);
-            console.log("ERROR MESSAGE: ", error.message);
-        });
+          })
+        } else {
+          console.log("Camera permission denied");
+        }
+      } catch (err) {
+        console.warn(err);
       }
+    };
+
+    
+
 
     return(
         <View style={styles.container}>
