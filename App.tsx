@@ -4,6 +4,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
+
 import {
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
@@ -11,7 +12,6 @@ import {
 import {
   DarkTheme as PaperDarkTheme,
   DefaultTheme as PaperDefaultTheme,
-  Provider as PaperProvider,
 } from 'react-native-paper';
 import merge from 'deepmerge';
 
@@ -27,12 +27,10 @@ export default function App() {
     return null;
   } else {
     return (
-      <PaperProvider theme={theme}>
         <SafeAreaProvider>
           <Navigation theme={theme} />
           <StatusBar />
         </SafeAreaProvider>
-      </PaperProvider>
     );
   }
 }
