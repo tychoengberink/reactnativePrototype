@@ -32,6 +32,7 @@
     "react-dom": "16.13.1",
     "react-hook-form": "7.7.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+    "react-native-contacts-wrapper": "^0.2.4",
     "react-native-elements": "^3.4.2",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-keyboard-aware-scroll-view": "0.9.1",

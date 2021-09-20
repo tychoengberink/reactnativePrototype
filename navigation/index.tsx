@@ -11,13 +11,14 @@ import { ColorSchemeName, Pressable } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import ModalScreen from '../screens/ModalScreen';
+import AddPartyScreen from '../screens/AddPartyScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import TabUpcomingPartiesScreen from '../screens/UpcomingPartiesTab';
 // import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import { NavigationContainer } from '@react-navigation/native'
+import DetailsPartyScreen from '../screens/DetailPartyScreen';
 
 export default function Navigation( props: any) {
   return (
@@ -41,7 +42,8 @@ function RootNavigator() {
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} options={{title: 'Add a party!'}} />
+        <Stack.Screen name="AddPartyModal" component={AddPartyScreen} options={{title: 'Add a party!'}} />
+        <Stack.Screen name="DetailsPartyModal" component={DetailsPartyScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -70,7 +72,7 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <TabBarIcon name="bars" color={color} />,
           headerRight: () => (
             <Pressable
-              onPress={() => navigation.navigate('Modal')}
+              onPress={() => navigation.navigate('AddPartyModal')}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}>
